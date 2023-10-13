@@ -49,3 +49,5 @@ Timestamp: Fri Sep 29 2023 15:49:40 GMT-0400 (Eastern Daylight Time)
 URL: /favicon.ico
 Timestamp: Fri Sep 29 2023 15:49:40 GMT-0400 (Eastern Daylight Time)
 
+::ffff:127.0.0.1 - - [13/Oct/2023:01:03:30 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [13/Oct/2023:01:03:58 +0000] "GET /movies HTTP/1.1" 304 - "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
