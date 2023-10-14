@@ -1,16 +1,10 @@
-// requiring Express into index.js and setting express to the variable of app
+// requiring Express and morgan into index.js and setting express to the variable of app
 const express = require('express'),
-  morgan = require('morgan'),
-  fs = require('fs'), // import built in node modules fs and path
-  path = require('path');
+  morgan = require('morgan');
 
 const app = express();
 
-// create a write stream (in append mode)
-// a 'log.txt' file is created in root directory
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
-
-// JSON object containing date of top 10 movies 
+// JSON object containing data of top 10 movies 
 let topTenMovies = [
     {
         title: 'The Lord of the Rings: The Fellowship of the Ring',
@@ -54,8 +48,9 @@ let topTenMovies = [
     } 
 ];
 
-// Setup the logger
-app.use(morgan('combined', {stream: accessLogStream}));
+// Invoking the middleware function. Logging to the terminal. "common" refers to morgan's "common" format
+
+app.use(morgan('common'));
 
 // Serving a static file
 app.use(express.static('public'));
