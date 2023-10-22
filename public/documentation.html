@@ -12,5 +12,155 @@
         movies, directors, and genres. Users will be able to sign up, update their
         personal information, and create a list of their favorite movies. 
     </p>
+
+    <table>
+      <thead>
+        <tr>
+          <td>Description</td>
+          <td>URL</td>
+          <td>Method Type</td>
+          <td>Query Parameters</td>
+          <td>Request Data Format</td>
+          <td> Response Data Format</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Return a list of ALL movies to user</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>None</td>
+          <td>JSON object with an array of all movies</td>
+        </tr>
+        <tr>
+          <td>Return data about a single movie by title to the user</td>
+          <td>/movies/:title</td>
+          <td>GET</td>
+          <td>:title</td>
+          <td>None</td>
+          <td>JSON object with data about a single movie, containing description, genre, director, image URL, if it is featured. Example:
+            <code>
+              {
+                'Title':'Inception',
+                'Description':'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.',
+                'Genre': {
+                    'Name':'Action',
+                    'Description':'Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats. The genre tends to feature a mostly resourceful hero struggling against incredible odds, which include life-threatening situations, a indestructible villain, or a pursuit which usually concludes in victory for the hero.'
+                },
+                'Director': {
+                    'Name':'Christopher Nolan',
+                    'Bio':'Christopher Edward Nolan CBE (born 30 July 1970) is a British and American filmmaker. Known for his Hollywood blockbusters with complex storytelling, Nolan is considered a leading filmmaker of the 21st century. His films have grossed $5 billion worldwide. The recipient of many accolades, he has been nominated for five Academy Awards, five BAFTA Awards and six Golden Globe Awards. In 2015, he was listed as one of the 100 most influential people in the world by Time, and in 2019, he was appointed Commander of the Order of the British Empire for his contributions to film.',
+                    'Birth':'1970'
+                },
+                'ImageURL':'https://www.imdb.com/title/tt1375666/mediaviewer/rm3426651392/?ref_=tt_ov_i',
+                'Featured':false
+              }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a genre by name/title</td>
+          <td>/movies/genre/:genreName</td>
+          <td>GET</td>
+          <td>:genreName</td>
+          <td>None</td>
+          <td>JSON object with data about a genre containing name and description properties. Example:
+            <code>
+              'Genre': {
+                'Name':'Action',
+                'Description':'Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats. The genre tends to feature a mostly resourceful hero struggling against incredible odds, which include life-threatening situations, a indestructible villain, or a pursuit which usually concludes in victory for the hero.'
+            }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a director by name</td>
+          <td>/movies/directors/:directorName</td>
+          <td>GET</td>
+          <td>:directorName</td>
+          <td>None</td>
+          <td>JSON object with data about a director. Example:
+            <code>
+              'Director': {
+                'Name':'Christopher Nolan',
+                'Bio':'Christopher Edward Nolan CBE (born 30 July 1970) is a British and American filmmaker. Known for his Hollywood blockbusters with complex storytelling, Nolan is considered a leading filmmaker of the 21st century. His films have grossed $5 billion worldwide. The recipient of many accolades, he has been nominated for five Academy Awards, five BAFTA Awards and six Golden Globe Awards. In 2015, he was listed as one of the 100 most influential people in the world by Time, and in 2019, he was appointed Commander of the Order of the British Empire for his contributions to film.',
+                'Birth':'1970'
+            }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/users</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>A JSON object holding data, structured like this:
+            <code>
+              {
+                name: 'Kim',
+                favoriteMovies: []
+              }
+            </code>
+          </td>
+          <td>A JSON object holding data and an ID. Example:
+            <code>
+              {
+                "name": "mary",
+                "favoriteMovies": [],
+                "id": "99a98aa0-83ee-4f3d-81ff-055fa104eebf"
+              }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to update their user info (username)</td>
+          <td>users/:id</td>
+          <td>PUT</td>
+          <td>:id</td>
+          <td>A JSON object with the user info that should be changed. Example:
+            <code>
+              {
+                "Username": String
+              }
+            </code>
+          </td>
+          <td>
+            A JSON object with all the user info including the updated username. Example:
+            <code>
+              {
+                "id": 1,
+                "name": "Kim Updated Name",
+                "favoriteMovies": []
+              }
+            </code>
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to add a movie to their list of favorites</td>
+          <td>/users/:id/:movieTitle</td>
+          <td>POST</td>
+          <td>:movieTitle</td>
+          <td>None</td>
+          <td>A string. Example: The Fountain has been added to user 1's array</td>
+        </tr>
+        <tr>
+          <td>Allow users to remove a movie from their list of favorites.</td>
+          <td>/users/:id/:movieTitle</td>
+          <td>DELETE</td>
+          <td>:id/:movieTitle</td>
+          <td>None</td>
+          <td>A string. Example: The Fountain has been removed from user 2's array</td>
+        </tr>
+        <tr>
+          <td>Allow existing users to deregister</td>
+          <td>/users/:id</td>
+          <td>DELETE</td>
+          <td>:id</td>
+          <td>None</td>
+          <td>A string. Example: user 2 has been deleted</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
