@@ -26,6 +26,14 @@
       </thead>
       <tbody>
         <tr>
+          <td>Welcome Message</td>
+          <td>/</td>
+          <td>GEt</td>
+          <td>None</td>
+          <td>None</td>
+          <td>A string. Example: Welcome to my Movie App!</td>
+        </tr>
+        <tr>
           <td>Return a list of ALL movies to user</td>
           <td>/movies</td>
           <td>GET</td>
@@ -34,10 +42,41 @@
           <td>JSON object with an array of all movies</td>
         </tr>
         <tr>
-          <td>Return data about a single movie by title to the user</td>
-          <td>/movies/:title</td>
+          <td>Return a list of all users</td>
+          <td>/users</td>
           <td>GET</td>
-          <td>:title</td>
+          <td>None</td>
+          <td>None</td>
+          <td>JSON object with an array of all users</td>
+        </tr>
+        <tr>
+          <td>Return user by username</td>
+          <td>/users/:Username</td>
+          <td>GET</td>
+          <td>:Username</td>
+          <td>None</td>
+          <td>JSON object with an array of user info. Example:
+            <code>
+              {
+                "_id": "65747a58e608e66ab11b4f73",
+                "Username": "testuser103",
+                "Password": "9876",
+                "Email": "testuser101@gmail.com",
+                "Birthday": "1953-09-02T04:00:00.000Z",
+                "FavoriteMovies": [
+                    "654e75a9a791edda1bde761e"
+                ],
+                "__v": 0
+              }
+            </code>
+          </td>
+
+        </tr>
+        <tr>
+          <td>Return data about a single movie by title to the user</td>
+          <td>/movies/:Title</td>
+          <td>GET</td>
+          <td>:Title</td>
           <td>None</td>
           <td>JSON object with data about a single movie, containing description, genre, director, image URL, if it is featured, rating. Example:
             <code>
@@ -99,67 +138,108 @@
           <td>A JSON object holding data, structured like this:
             <code>
               {
-                name: 'Kim',
-                favoriteMovies: []
+                'Username': 'Test200',
+                'Password': '123456',
+                'Email': 'Test200@gamil.com'
+                'Birthday': '04-23-1987'
               }
             </code>
           </td>
           <td>A JSON object holding data and an ID. Example:
             <code>
               {
-                "name": "mary",
-                "favoriteMovies": [],
+                'Username': 'Test200',
+                'Password': '123456',
+                'Email': 'Test200@gamil.com'
+                'Birthday': '04-23-1987'
+                'FavoriteMovies': [],
                 "id": "99a98aa0-83ee-4f3d-81ff-055fa104eebf"
               }
             </code>
           </td>
         </tr>
         <tr>
-          <td>Allow users to update their user info (username)</td>
-          <td>users/:id</td>
+          <td>Allow users to update their user info (by username)</td>
+          <td>users/:Username</td>
           <td>PUT</td>
-          <td>:id</td>
+          <td>:Username</td>
           <td>A JSON object with the user info that should be changed. Example:
             <code>
               {
-                "Username": String
+                "Username": "testuser103",
+                "Password": "9876",
+                "Email": "testuser101@gmail.com",
+                "Birthday": "09-02-1953"
               }
             </code>
           </td>
           <td>
-            A JSON object with all the user info including the updated username. Example:
+            A JSON object with all the user info including the updated info. Example:
             <code>
               {
-                "id": 1,
-                "name": "Kim Updated Name",
-                "favoriteMovies": []
+                "_id": "65747a58e608e66ab11b4f73",
+                "Username": "testuser103",
+                "Password": "9876",
+                "Email": "testuser101@gmail.com",
+                "Birthday": "1953-09-02T04:00:00.000Z",
+                "FavoriteMovies": [
+                "654e75a9a791edda1bde761e"
               }
             </code>
           </td>
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/users/:id/:movieTitle</td>
+          <td>/users/:Username/movies/:MovieID</td>
           <td>POST</td>
-          <td>:movieTitle</td>
+          <td>:Username and :movieTitle</td>
           <td>None</td>
-          <td>A string. Example: The Fountain has been added to user 1's array</td>
+          <td>A JSON object with all of the user info including favorite movies list with the new movie included. Example:
+            <code>
+              {
+                "_id": "654e810ca791edda1bde7621",
+                "Username": "jimsmith",
+                "Password": "testing345",
+                "Email": "jimsmith5640@gmail.com",
+                "Birthday": "1991-12-21T00:00:00.000Z",
+                "FavoriteMovies": [
+                    "654e52c1a791edda1bde7619",
+                    "654e75a9a791edda1bde761e",
+                    "654e49c5a791edda1bde7617"
+                ]
+              }
+            </code>
+          </td>
         </tr>
         <tr>
           <td>Allow users to remove a movie from their list of favorites.</td>
-          <td>/users/:id/:movieTitle</td>
+          <td>/users/:Username/movies/:MovieID</td>
           <td>DELETE</td>
-          <td>:id/:movieTitle</td>
+          <td>:Username and :movieTitle</td>
           <td>None</td>
-          <td>A string. Example: The Fountain has been removed from user 2's array</td>
+          <td>A JSON object with all of the user info including favorite movies list with the new movie included. Example:
+            <code>
+              {
+                "_id": "654e810ca791edda1bde7621",
+                "Username": "jimsmith",
+                "Password": "testing345",
+                "Email": "jimsmith5640@gmail.com",
+                "Birthday": "1991-12-21T00:00:00.000Z",
+                "FavoriteMovies": [
+                    "654e75a9a791edda1bde761e",
+                    "654e49c5a791edda1bde7617"
+                ]
+              }
+            </code>
+          </td>
         </tr>
         <tr>
           <td>Allow existing users to deregister</td>
-          <td>/users/:id</td>
+          <td>/users/:Username</td>
           <td>DELETE</td>
-          <td>:id</td>
+          <td>:Username</td>
           <td>None</td>
-          <td>A string. Example: user 2 has been deleted</td>
+          <td>A string. Example: Test200 was deleted.</td>
         </tr>
       </tbody>
     </table>
